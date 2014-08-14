@@ -1,4 +1,4 @@
-name := "HelloWorldEmbededJetty"
+name := "webappDeploy"
 
 version := "1.0"
 
