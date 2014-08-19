@@ -22,12 +22,13 @@ object BuildSettings {
       version := "1.0",
       scalaVersion := "2.10.4",
 
-      dist <<= (baseDirectory, target, packageBin in Compile) map {
-      (base, targetDir, artifact) =>
+      dist <<= (baseDirectory, target, packageBin in Compile, dependencyClasspath in Compile) map {
+      (base, targetDir, artifact, libs) =>
+        val jars = libs.map(f => (f.data, f.data.name))
         val files = Seq(
-        artifact           ->  "lib/webappDeploy.jar"
+        artifact           ->  "webappDeploy.jar"
         )
-        IO.zip(files, targetDir / "dist.zip")
+        IO.zip(files ++ jars, targetDir / "dist.zip")
     }
   )
 }
