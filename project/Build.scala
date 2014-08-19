@@ -22,7 +22,13 @@ object BuildSettings {
       version := "1.0",
       scalaVersion := "2.10.4",
 
-    dist <<= (baseDirectory) map {(aVar) => println("just a sample task") }
+      dist <<= (baseDirectory, target, packageBin in Compile) map {
+      (base, targetDir, artifact) =>
+        val files = Seq(
+        artifact           ->  "lib/webappDeploy.jar"
+        )
+        IO.zip(files, targetDir / "dist.zip")
+    }
   )
 }
 
