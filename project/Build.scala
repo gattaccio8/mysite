@@ -22,35 +22,28 @@ object BuildSettings {
       version := "1.0",
       scalaVersion := "2.10.4",
 
-//      mappings in (Compile, packageBin) ++= includeWebapp(baseDirectory.value),
+  resourceGenerators in Compile <+= (resourceManaged, baseDirectory) map {
+      (managedBase, base) =>
+        val webappBase = base / "src" / "main" / "webapp"
+        for {
+          (from, to) <- webappBase ** "*" x rebase(webappBase, managedBase / "main" / "webapp")
+        } yield {
+          Sync.copy(from, to)
+          to
+        }
+    },
 
-    resourceGenerators in Compile <+= (resourceManaged, baseDirectory) map {
-        (managedBase, base) =>
-          val webappBase = base / "src" / "main" / "webapp"
-          for {
-            (from, to) <- webappBase ** "*" x rebase(webappBase, managedBase / "main" / "webapp")
-          } yield {
-            Sync.copy(from, to)
-            to
-          }
-      },
+    dist <<= (baseDirectory, target, packageBin in Compile, dependencyClasspath in Compile) map {
+      (base, targetDir, artifact, libs) =>
 
-      dist <<= (baseDirectory, target, packageBin in Compile, dependencyClasspath in Compile) map {
-        (base, targetDir, artifact, libs) =>
-
-          val jars = libs.map(_.data) x flat
-          val script = file("webappDeploy.sh") x flat
-          val files = Seq(
-              artifact                  -> "webappDeploy.jar"
-          )
-          IO.zip(files ++ jars ++ script, targetDir / "dist.zip")
+        val jars = libs.map(_.data) x flat
+        val script = file("webappDeploy.sh") x flat
+        val files = Seq(
+            artifact                  -> "webappDeploy.jar"
+        )
+      IO.zip(files ++ jars ++ script, targetDir / "dist.zip")
     }
   )
-
-//  def includeWebapp(base: File): Seq[(File, String)] = {
-//    val resource = base / "src" / "main" / "webapp"
-//    resource x rebase(resource, "webapp")
-//  }
 }
 
 object Resolvers {
