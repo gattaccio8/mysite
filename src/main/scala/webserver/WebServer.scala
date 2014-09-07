@@ -44,8 +44,11 @@ object WebServer extends App {
     context.setContextPath("/")
     if(new File("src/main/webapp").exists())
       context.setWar("src/main/webapp")
-    else
-      context.setWar(getClass.getClassLoader.getResource("webapp").toExternalForm)
+    else {
+      val loader = context.getClass.getClassLoader
+      val war = loader.getResource("webapp").toExternalForm
+      context.setWar(war)
+    }
     context
   }
 
