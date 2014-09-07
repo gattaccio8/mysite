@@ -8,7 +8,7 @@ object WebappDeploy extends Build {
   import scala.collection._
 
   lazy val root = Project(id = "webappDeploy", base = file("."), settings = standardBuildSettings ++ Seq(
-    resolvers := Seq(jettyRepo, resolver, Classpaths.typesafeResolver),
+    resolvers := Seq(jettyRepo, resolver, Classpaths.typesafeReleases),
     libraryDependencies ++= jetty ++ scalaTest
   ))
 }
