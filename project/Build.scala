@@ -24,7 +24,7 @@ object BuildSettings {
 
     mappings in (Compile, packageBin) ++= {
       val webapp: File = baseDirectory.value / "src/main/webapp"
-      for ((from, to) <- webapp descendantsExcept ("*.*", ".svn") x rebase(webapp, "webapp")) yield (from, to)
+      for ((from, to) <- (webapp ***) x rebase(webapp, "webapp")) yield (from, to)
     },
 
     dist <<= (baseDirectory, target, packageBin in Compile, dependencyClasspath in Compile) map {
