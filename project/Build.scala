@@ -22,15 +22,9 @@ object BuildSettings {
       version := "1.0",
       scalaVersion := "2.10.4",
 
-  resourceGenerators in Compile <+= (resourceManaged, baseDirectory) map {
-      (managedBase, base) =>
-        val webappBase = base / "src" / "main" / "webapp"
-        for {
-          (from, to) <- webappBase ** "*" x rebase(webappBase, managedBase / "main" / "webapp")
-        } yield {
-          Sync.copy(from, to)
-          to
-        }
+    mappings in (Compile, packageBin) ++= {
+      val webapp: File = baseDirectory.value / "src/main/webapp"
+      for ((from, to) <- webapp descendantsExcept ("*.*", ".svn") x rebase(webapp, "webapp")) yield (from, to)
     },
 
     dist <<= (baseDirectory, target, packageBin in Compile, dependencyClasspath in Compile) map {
