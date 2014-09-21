@@ -1,4 +1,4 @@
-name := "webappDeploy"
+name := "mysite"
 
 version := "1.0"
 

@@ -7,7 +7,7 @@ object WebappDeploy extends Build {
   import BuildSettings._
   import scala.collection._
 
-  lazy val root = Project(id = "webappDeploy", base = file("."), settings = standardBuildSettings ++ Seq(
+  lazy val root = Project(id = "mysite", base = file("."), settings = standardBuildSettings ++ Seq(
     resolvers := Seq(jettyRepo, resolver, Classpaths.typesafeReleases),
     libraryDependencies ++= jetty ++ scalaTest
   ))
@@ -18,7 +18,7 @@ object BuildSettings {
   val dist = taskKey[Unit]("dist")
 
   val standardBuildSettings: Seq[Def.Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
-      organization := "webappDeploy",     //TODO these 3 lines are ignored here and picked from build.sbt instead
+      organization := "mysite",     //TODO these 3 lines are ignored here and picked from build.sbt instead
       version := "1.0",
       scalaVersion := "2.10.4",
 
@@ -31,9 +31,9 @@ object BuildSettings {
       (base, targetDir, artifact, libs) =>
 
         val jars = libs.map(_.data) x flat
-        val script = file("webappDeploy.sh") x flat
+        val script = file("mysite.sh") x flat
         val files = Seq(
-            artifact                  -> "webappDeploy.jar"
+            artifact                  -> "mysite.jar"
         )
       IO.zip(files ++ jars ++ script, targetDir / "dist.zip")
     }
