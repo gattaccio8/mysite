@@ -18,7 +18,7 @@ object BuildSettings {
   val dist = taskKey[Unit]("dist")
 
   val standardBuildSettings: Seq[Def.Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
-      organization := "mysite",     //TODO these 3 lines are ignored here and picked from build.sbt instead
+      organization := "mysite",
       version := "1.0",
       scalaVersion := "2.11.1",
 
