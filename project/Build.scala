@@ -20,7 +20,7 @@ object BuildSettings {
   val standardBuildSettings: Seq[Def.Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
       organization := "mysite",     //TODO these 3 lines are ignored here and picked from build.sbt instead
       version := "1.0",
-      scalaVersion := "2.10.4",
+      scalaVersion := "2.11.1",
 
     mappings in (Compile, packageBin) ++= {
       val webapp: File = baseDirectory.value / "src/main/webapp"
