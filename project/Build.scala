@@ -54,5 +54,8 @@ object Dependency {
       "org.eclipse.jetty" % "jetty-webapp" % jettyVersion
     )
 
-  val scalaTest = Seq("org.scalatest" % "scalatest_2.11" % scalaTestVersion  % "test")
+  val scalaTest = Seq(
+    "org.scalatest" % "scalatest_2.11" % scalaTestVersion  % "test",
+    "org.seleniumhq.selenium" % "selenium-java" % "2.35.0" % "test"
+  )
 }

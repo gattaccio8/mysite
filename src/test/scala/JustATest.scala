@@ -1,8 +1,15 @@
-import org.scalatest.FlatSpec
+import org.scalatest.selenium.HtmlUnit
+import org.scalatest.{ShouldMatchers, FlatSpec}
+import webserver.WebServer
 
-class JustATest extends FlatSpec {
-  "An empty Set" should "have size 0" in {
-      assert(Set.empty.size == 0)
-    }
+class JustATest extends FlatSpec with ShouldMatchers with HtmlUnit {
 
+  val host = "http://localhost:8080/"
+
+  "The app home page" should
+    "have the correct title" in {
+      WebServer.startServer
+      go to (host + "index.html")
+      pageTitle should be ("mysite title")
+  }
 }
