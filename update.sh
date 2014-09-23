@@ -1,9 +1,9 @@
 #!/bin/sh
 
-echo Updating intelliJ
+
 echo removing old libs
 
-rm -r .idea/libraries
+rm -r .idea/*
 rm -rf .idea_modules/*
 
 echo Updating dependencies

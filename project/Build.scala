@@ -9,7 +9,7 @@ object WebappDeploy extends Build {
 
   lazy val root = Project(id = "mysite", base = file("."), settings = standardBuildSettings ++ Seq(
     resolvers := Seq(jettyRepo, resolver, Classpaths.typesafeReleases),
-    libraryDependencies ++= jetty ++ scalaTest
+    libraryDependencies ++= jetty ++ scalaTest ++ lift
   ))
 }
 
@@ -17,7 +17,7 @@ object BuildSettings {
 
   val dist = taskKey[Unit]("dist")
 
-  val standardBuildSettings: Seq[Def.Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
+  val standardBuildSettings: Seq[Def.Setting[_]] = Defaults.coreDefaultSettings ++ Seq[Setting[_]](
       organization := "mysite",
       version := "1.0",
       scalaVersion := "2.11.1",
@@ -48,14 +48,22 @@ object Resolvers {
 object Dependency {
   private val jettyVersion = "8.1.7.v20120910"
   private val scalaTestVersion = "2.2.1"
+  private val liftwebVersion = "3.0-M1"
+  private val liftwigetsVersion = "2.4-M1"
+  private val seleniumVersion = "2.35.0"
 
   val jetty = Seq (
       "org.eclipse.jetty" % "jetty-server" % jettyVersion,
       "org.eclipse.jetty" % "jetty-webapp" % jettyVersion
     )
 
+  val lift = Seq(
+    "net.liftweb" % "lift-webkit_2.10" % liftwebVersion//,
+//    "net.liftweb" % "lift-widgets_2.9.0-1" % liftwigetsVersion
+  )
+
   val scalaTest = Seq(
     "org.scalatest" % "scalatest_2.11" % scalaTestVersion  % "test",
-    "org.seleniumhq.selenium" % "selenium-java" % "2.35.0" % "test"
+    "org.seleniumhq.selenium" % "selenium-java" % seleniumVersion % "test"
   )
 }
