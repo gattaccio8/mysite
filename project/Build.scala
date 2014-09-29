@@ -51,6 +51,7 @@ object Dependency {
   private val liftwebVersion = "3.0-M1"
   private val liftwigetsVersion = "2.4-M1"
   private val seleniumVersion = "2.35.0"
+  private val scalaXmlVersion = "1.0.2"
 
   val jetty = Seq (
       "org.eclipse.jetty" % "jetty-server" % jettyVersion,
@@ -58,12 +59,13 @@ object Dependency {
     )
 
   val lift = Seq(
-    "net.liftweb" % "lift-webkit_2.10" % liftwebVersion//,
-//    "net.liftweb" % "lift-widgets_2.9.0-1" % liftwigetsVersion
+    "net.liftweb" % "lift-webkit_2.10" % liftwebVersion,
+    "net.liftweb" % "lift-widgets_2.9.0-1" % liftwigetsVersion
   )
 
   val scalaTest = Seq(
     "org.scalatest" % "scalatest_2.11" % scalaTestVersion  % "test",
-    "org.seleniumhq.selenium" % "selenium-java" % seleniumVersion % "test"
+    "org.seleniumhq.selenium" % "selenium-java" % seleniumVersion % "test",
+    "org.scala-lang.modules" % "scala-xml_2.11" % scalaXmlVersion
   )
 }
