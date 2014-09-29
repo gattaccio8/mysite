@@ -59,8 +59,8 @@ object Dependency {
     )
 
   val lift = Seq(
-    "net.liftweb" % "lift-webkit_2.10" % liftwebVersion,
-    "net.liftweb" % "lift-widgets_2.9.0-1" % liftwigetsVersion
+    "net.liftweb" % "lift-webkit_2.10" % liftwebVersion//,
+//    "net.liftweb" % "lift-widgets_2.9.0-1" % liftwigetsVersion
   )
 
   val scalaTest = Seq(
