@@ -8,7 +8,7 @@ class JustATest extends FlatSpec with ShouldMatchers with HtmlUnit {
 
   "The app home page" should
     "have the correct title" in {
-      WebServer.startServer
+      WebServer
       go to (host + "index.html")
       pageTitle should be ("mysite title")
   }
