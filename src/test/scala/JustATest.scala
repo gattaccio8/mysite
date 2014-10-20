@@ -1,18 +1,17 @@
 import org.scalatest.selenium.HtmlUnit
-import org.scalatest.{ShouldMatchers, FlatSpec}
-import webserver.WebServer
+import org.scalatest.{FunSuite, ShouldMatchers}
 
-class JustATest extends FlatSpec with ShouldMatchers with HtmlUnit with WebSpecification {
+class JustATest extends FunSuite with ShouldMatchers with HtmlUnit with WebSpecification {
 
   val host = "http://localhost:8080/"
 
-  "The app home page" should "have the correct title" in {
+  test("The app home page have the correct title") {
     go to (host + "index.html")
-    pageTitle should be ("mysite title")
+    assert(pageTitle === "mysite title")
   }
 
-  "it" should "have a h1 msg" in {
+  test("have a h1 msg") {
     go to (host + "index.html")
-    id("helloText").element.isDisplayed
+    assert(id("helloText").element.isDisplayed)
   }
 }
