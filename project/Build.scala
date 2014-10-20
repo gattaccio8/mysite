@@ -20,7 +20,7 @@ object BuildSettings {
   val standardBuildSettings: Seq[Def.Setting[_]] = Defaults.coreDefaultSettings ++ Seq[Setting[_]](
       organization := "mysite",
       version := "1.0",
-      scalaVersion := "2.11.1",
+      scalaVersion := "2.10.4",
 
     mappings in (Compile, packageBin) ++= {
       val webapp: File = baseDirectory.value / "src/main/webapp"
@@ -47,8 +47,8 @@ object Resolvers {
 
 object Dependency {
   private val jettyVersion = "8.1.7.v20120910"
-  private val scalaTestVersion = "2.2.1"
-  private val liftwebVersion = "3.0-M1"
+  private val scalaTestVersion = "2.1.3"
+  private val liftwebVersion = "2.5.1"
   private val liftwigetsVersion = "2.4-M1"
   private val seleniumVersion = "2.35.0"
   private val scalaXmlVersion = "1.0.2"
@@ -59,13 +59,11 @@ object Dependency {
     )
 
   val lift = Seq(
-    "net.liftweb" % "lift-webkit_2.10" % liftwebVersion//,
-//    "net.liftweb" % "lift-widgets_2.9.0-1" % liftwigetsVersion
+    "net.liftweb" %% "lift-webkit" % liftwebVersion exclude("org.scala-lang", "scala-compiler")
   )
 
   val scalaTest = Seq(
-    "org.scalatest" % "scalatest_2.11" % scalaTestVersion  % "test",
-    "org.seleniumhq.selenium" % "selenium-java" % seleniumVersion % "test",
-    "org.scala-lang.modules" % "scala-xml_2.11" % scalaXmlVersion
+    "org.scalatest" % "scalatest_2.10" % scalaTestVersion  % "test",
+    "org.seleniumhq.selenium" % "selenium-java" % seleniumVersion % "test"
   )
 }
