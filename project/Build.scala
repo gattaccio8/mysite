@@ -9,7 +9,7 @@ object WebappDeploy extends Build {
 
   lazy val root = Project(id = "mysite", base = file("."), settings = standardBuildSettings ++ Seq(
     resolvers := Seq(jettyRepo, resolver, Classpaths.typesafeReleases),
-    libraryDependencies ++= jetty ++ scalaTest ++ lift
+    libraryDependencies ++= jetty ++ scalaTest ++ lift ++ mongodb
   ))
 }
 
@@ -52,6 +52,7 @@ object Dependency {
   private val liftwigetsVersion = "2.4-M1"
   private val seleniumVersion = "2.35.0"
   private val scalaXmlVersion = "1.0.2"
+  private val mongodbVersion = "2.8.0"
 
   val jetty = Seq (
       "org.eclipse.jetty" % "jetty-server" % jettyVersion,
@@ -65,5 +66,9 @@ object Dependency {
   val scalaTest = Seq(
     "org.scalatest" % "scalatest_2.10" % scalaTestVersion  % "test",
     "org.seleniumhq.selenium" % "selenium-java" % seleniumVersion % "test"
+  )
+
+  val mongodb = Seq(
+    "org.mongodb" %% "casbah" % mongodbVersion
   )
 }
