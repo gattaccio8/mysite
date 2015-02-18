@@ -1,4 +1,5 @@
 import com.gargoylesoftware.htmlunit.BrowserVersion
+import infrastructure.WebSpecification
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 import org.scalatest.selenium.HtmlUnit
 import org.scalatest.{FunSuite, ShouldMatchers}
