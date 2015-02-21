@@ -1,23 +1,47 @@
-package bootstrap
+package bootstrap.liftweb
 
-import mysite.comet.MyComet
-import net.liftweb._
-import common._
-import http._
-import sitemap._
-import Loc._
+import mysite.comet._
+import net.liftweb.common._
+import net.liftweb.http._
+import net.liftweb.sitemap.Loc._
+import net.liftweb.sitemap._
+
+trait LiftPage {
+  val title: String
+  val url: String
+  lazy val dispatch = url.split("/").toList
+  def menu: Menu.Menuable
+}
+
+case class Page(title: String, pageName: String) extends LiftPage {
+  val url = pageName
+  def menu = Menu(S ? title) / pageName
+}
+
+object Pages {
+  val mycomet = Page("title", "mycomet")
+}
 
 class Boot {
+  import Pages._
+  import view.CometActorView._
+
   def boot {
     LiftRules.addToPackages("mysite")
 
-    val entries = Menu(Loc("HomePage", "index" :: Nil, "Home Page", Hidden)) :: Nil
+    val entries = SiteMap(
+      Menu.i("Home") / "index",
+      Menu.i("MyComet") / mycomet.pageName >> Hidden)
+
+//      mycomet.menu >> LocGroup("main")
+//      Menu(Loc("HomePage", "index" :: Nil, "Home Page", Hidden)) :: Nil
 
     LiftRules.viewDispatch.append {
-      case List("MyComet", "mycomet") => Left(() => Full(<div>hello comet</div>))
+      case mycomet.dispatch => Left(() => Full(cometActorView[MyComet]))
     }
 
-    LiftRules.setSiteMap(SiteMap(entries: _*))
+    LiftRules.setSiteMap(entries)
+
     LiftRules.jsArtifacts = net.liftweb.http.js.jquery.JQuery14Artifacts // Use jQuery 1.4
 
     LiftRules.ajaxStart =
