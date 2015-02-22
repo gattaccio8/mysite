@@ -1,9 +1,10 @@
 package mysite.snippet
 
-import net.liftweb.util._
-import Helpers._
+import persistence.PersistedUser
+import net.liftweb.util.BindHelpers._
 
 class HelloWorld {
-  // replace the contents of the element with id "time" with the date
-  def render = "#time *" #> new java.util.Date().toString
+  def render =
+    "#time" #> <span id="time">{new java.util.Date().toString}</span> &
+      "#firstname" #> <span id="firstname">{new PersistedUser().findUserName("name")}</span>
 }
