@@ -42,13 +42,7 @@ object WebServer extends App {
     val context = new WebAppContext()
     context.setServer(server)
     context.setContextPath("/")
-    if(new File("src/main/webapp").exists())
-      context.setWar("src/main/webapp")
-    else {
-      val loader = context.getClass.getClassLoader
-      val war = loader.getResource("webapp").toExternalForm
-      context.setWar(war)
-    }
+    context.setWar(context.getClass.getClassLoader.getResource("webapp").toExternalForm)
     context.setExtractWAR(false)
     context
   }
