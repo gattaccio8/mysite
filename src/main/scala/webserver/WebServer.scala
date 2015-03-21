@@ -49,6 +49,7 @@ object WebServer extends App {
       val war = loader.getResource("webapp").toExternalForm
       context.setWar(war)
     }
+    context.setExtractWAR(false)
     context
   }
 
