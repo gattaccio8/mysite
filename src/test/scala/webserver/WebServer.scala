@@ -41,7 +41,7 @@ object WebServer {
     context.setServer(server)
     context.setContextPath("/")
     context.setWar("src/main/webapp")
-    context.setExtractWAR(true)
+    context.setExtractWAR(false)
     context
   }
 
