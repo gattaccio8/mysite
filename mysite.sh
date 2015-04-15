@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9005"
+
 function start() {
     nohup java -cp $(echo *.jar | tr ' ' ':') webserver.WebServer | awk '{ print strftime(), $0; fflush() }' >> stdout.log 2>&1 &
 }
