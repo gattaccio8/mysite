@@ -12,6 +12,7 @@ class DBSpec extends FunSuite with MustMatchers with HtmlUnit with WebSpecificat
   val driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_17)
 
   test("The app home page have the user name from db") {
+    (pending)
     new PersistedUser().addUser
     driver.navigate().to(host + "index.html")
     assert(driver.findElementById("name").getText === "Paolo")
