@@ -9,7 +9,7 @@ object WebappDeploy extends Build {
 
   lazy val root = Project(id = "mysite", base = file("."), settings = standardBuildSettings ++ Seq(
     resolvers := Seq(jettyRepo, resolver, Classpaths.typesafeReleases),
-    libraryDependencies ++= jetty ++ scalaTest ++ lift ++ mongodb ++ sl4
+    libraryDependencies ++= jetty ++ scalaTest ++ mongodb ++ sl4
   ))
 }
 
@@ -59,10 +59,6 @@ object Dependency {
       "org.eclipse.jetty" % "jetty-server" % jettyVersion,
       "org.eclipse.jetty" % "jetty-webapp" % jettyVersion
     )
-
-  val lift = Seq(
-    "net.liftweb" %% "lift-webkit" % liftwebVersion exclude("org.scala-lang", "scala-compiler")
-  )
 
   val sl4 =  Seq(
     "org.slf4j" % "slf4j-api" % slfLogVersion,
